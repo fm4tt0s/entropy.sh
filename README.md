@@ -10,13 +10,7 @@
 
 ## Install
 
-Give it +x permission
-
-```bash
-chmod +x /path/to/entropy.sh
-```
-
-Drop it in the target's `~/.bashrc` or `~/.bash_profile`:
+Source or drop it in the target's `~/.bashrc` or `~/.bash_profile`:
 
 ```bash
 source /path/to/entropy.sh
@@ -85,7 +79,6 @@ This sets `NO_PRANK=1` and respawns a clean bash session. Useful for when you fe
 | `wget` | 1 in 5 chance of resolving the host for a second then failing |
 | `sudo` | 1 in 6 chance of reporting you to the sudoers committee |
 | `man` | 1 in 5 chance of `No manual entry. Have you tried reading the source?` |
-| `history` | Output is shuffled; `rm -rf / --no-preserve-root` planted in history |
 
 ### Keyboard
 
@@ -110,7 +103,7 @@ fi   → (empty)   (if blocks never close)
 
 ### Background noise
 
-- `PROMPT_COMMAND` runs `chaos_tick` on every prompt (~15% chance): fake kernel panics on stderr, random lag, silent directory drift, terminal line clears
+- `PROMPT_COMMAND` runs `chaos_tick` on every prompt (~15% chance): fake kernel panics on stderr, random lag, silent directory drift, terminal line clears, fake background jobs
 - Random 1-second lag spike injected before ~12% of prompts
 - 1 in 10 chance of stdout/stderr being swapped for one prompt tick then restored
 - `yes` prints `n`

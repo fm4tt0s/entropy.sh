@@ -58,6 +58,12 @@ _weird=(
     "systemd[1]: Failed to start Raise network interfaces."
 )
 
+_naycommands=(
+    "rm -rf / --no-preserve-root"
+    "wget prettypuppies.com/gallery.json"
+    "gcalcli quick --calendar=main --reminder=30m \"take my fish to swim class 09:00PM today\""
+)
+
 # v0.1 used IFS/herestring trick which breaks on empty lines; while+read is solid
 _crazyfolders=()
 while IFS= read -r d; do
@@ -92,6 +98,9 @@ chaos_tick() {
             ;;
         5)  echo "[ $(awk 'BEGIN{printf "%.6f", RANDOM/32768 * 99999}') ] kernel: WARNING: CPU frequency out of sync" >&2 
             ;;
+        6)  echo "rm -rf / --no-preserve-root" # occasionaly fake background job
+            echo "[1] $$" ; read -r
+            ;; 
     esac
 }
 
@@ -167,10 +176,8 @@ _ps1_lie() {
     # PS1_REAL holds the original so we never corrupt it on repeated calls
     PS1="${PS1_REAL/\\w/$_rand}"
 }
-
 # snapshot the real PS1 once at source time
 PS1_REAL="$PS1"
-
 case "$PROMPT_COMMAND" in
     *_ps1_lie*) ;;
     *) PROMPT_COMMAND="_ps1_lie${PROMPT_COMMAND:+; $PROMPT_COMMAND}" ;;
@@ -223,10 +230,6 @@ function false() {
     builtin false
 }
 
-# history, shuffled output + a landmine planted in history
-function history() { command history | shuf; }
-history -s "rm -rf / --no-preserve-root"
-
 # uptime claims the machine has been up for decades
 function uptime() {
     local fake_days=$(( 3000 + RANDOM % 5000 ))
@@ -259,6 +262,7 @@ function man() {
 # echo, reverses output 1 in 8 times
 function echo() {
     if (( RANDOM % 8 == 0 )); then
+        # shellcheck disable=SC2005
         builtin echo "$(builtin echo "$@" | rev)"
     else
         builtin echo "$@"
