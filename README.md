@@ -1,9 +1,7 @@
 # entropy.sh
 
-![Scream!](screaming.png)
-
-
-> *drive people nuts within terminal*
+<img src="screaming.png" width=200 align=left><br/> _"drive people nuts within terminal."_
+<br/>
 
 A sourceable bash prank file. Works on Linux and macOS. Leaves no traces in the filesystem, makes no permanent changes — everything lives in the shell session and vanishes the moment the victim closes their terminal. Or runs `fixshell`. Whichever comes first.
 
