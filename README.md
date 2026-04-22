@@ -10,6 +10,12 @@
 
 ## Install
 
+Give it +x permission
+
+```bash
+chmod +x /path/to/entropy.sh
+```
+
 Drop it in the target's `~/.bashrc` or `~/.bash_profile`:
 
 ```bash
